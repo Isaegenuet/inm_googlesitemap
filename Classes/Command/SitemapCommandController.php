@@ -40,9 +40,18 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		// It may take a whils to crawl a site ...
 		set_time_limit(10000);
 
+		/*
+		exec('php /Users/ralf/Downloads/PHPCrawl_083/enex2.php', $output);
+		$GLOBALS['BE_USER']->simplelog($output, $extKey = 'inm_googlesitemap', $error = 0);
+		return;
+		*/
+
+		/** @var \INM\InmGooglesitemap\Generators\SitemapGenerator $crawler */
 		$crawler = $this->objectManager->get('INM\InmGooglesitemap\Generators\SitemapGenerator');
 		$crawler->setSitemapOutputFile("sitemap.xml"); // Set output-file, but temporary, until created.
 		$crawler->setURL("www.energie-experten.ch");
+		$crawler->setRequestDelay(0.5);
+		$crawler->setUserAgentString('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/601.4.4 (KHTML, like Gecko) Version/9.0.3 Safari/601.4.4');
 		$crawler->addContentTypeReceiveRule("#text/html#");
 		// exclude file endings for assets
 		$crawler->addURLFilterRule("#\.(jpg|jpeg|gif|png|mp3|mp4|gz|ico)$# i");
@@ -65,5 +74,10 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 
 		// now that we are finished, hopefully, put the file into right place / name
 		$crawler->publishFile();
+
+		$report = $crawler->getProcessReport();
+
+		$message = $report->abort_reason;
+		$GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
 	}
 }

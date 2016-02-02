@@ -26,15 +26,15 @@ namespace INM\InmGooglesitemap\Generators;
 
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('inm_googlesitemap') . 'Classes/Libraries/PHPCrawl/libs/PHPCrawler.class.php');
 
-class SitemapGenerator extends PHPCrawler {
+class SitemapGenerator extends \PHPCrawler {
 
 	protected $sitemapTemporaryOutputFile;
 
 	protected $sitemapFinalOutputFile;
 
 	public function setSitemapOutputFile($file) {
-		$this->sitemapTemporaryOutputFile = '_temporary_' . $file;
-		$this->sitemapFinalOutputFile = $file;
+		$this->sitemapTemporaryOutputFile = PATH_site . '_temporary_' . $file;
+		$this->sitemapFinalOutputFile = PATH_site . $file;
 
 		if (file_exists($this->sitemapTemporaryOutputFile)) {
 			unlink($this->sitemapTemporaryOutputFile);
@@ -54,7 +54,7 @@ class SitemapGenerator extends PHPCrawler {
 			$lb = "<br />";
 		}
 
-		echo "Adding " . $DocInfo->url . " to sitemap file" . $lb;
+		// echo "Adding " . $DocInfo->url . " to sitemap file" . $lb;
 
 		file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
 				"  <loc>" . $DocInfo->url . "</loc>\r\n" .
@@ -71,3 +71,4 @@ class SitemapGenerator extends PHPCrawler {
 		rename($this->sitemapTemporaryOutputFile, $this->sitemapFinalOutputFile);
 	}
 }
+?>
