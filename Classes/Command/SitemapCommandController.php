@@ -63,7 +63,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		$crawler->setSitemapOutputFile("sitemap.xml"); // Set output-file, but temporary, until created.
 		$crawler->setURL($url);
 		//$crawler->setRequestDelay(0.5);
-		$crawler->setUserAgentString('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/601.4.4 (KHTML, like Gecko) Version/9.0.3 Safari/601.4.4');
+		$crawler->setUserAgentString('INM Google Sitemap Crawler');
 		$crawler->addContentTypeReceiveRule("#text/html#");
 		// exclude file endings for assets
 		$crawler->addURLFilterRule($regexFileEndings);
