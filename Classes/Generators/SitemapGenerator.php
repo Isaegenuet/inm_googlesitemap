@@ -61,6 +61,11 @@ class SitemapGenerator extends \PHPCrawler {
 				" </url>\r\n", FILE_APPEND);
 
 		flush();
+
+		if ($DocInfo->error_occured === TRUE) {
+			$message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
+			$GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
+		}
 	}
 
 	public function closeFile() {

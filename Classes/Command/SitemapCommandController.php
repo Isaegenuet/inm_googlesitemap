@@ -85,10 +85,5 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 
 		// now that we are finished, hopefully, put the file into right place / name
 		$crawler->publishFile();
-
-		$report = $crawler->getProcessReport();
-
-		$message = $report->abort_reason;
-		$GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
 	}
 }
