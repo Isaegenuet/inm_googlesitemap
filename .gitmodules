@@ -1,0 +1,3 @@
+[submodule "Classes/Libraries/PHPCrawl"]
+	path = Classes/Libraries/PHPCrawl
+	url = git@github.com:mmerian/phpcrawl.git
