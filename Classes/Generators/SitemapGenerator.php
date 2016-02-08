@@ -55,9 +55,10 @@ class SitemapGenerator extends \PHPCrawler {
 		}
 
 		// echo "Adding " . $DocInfo->url . " to sitemap file" . $lb;
-
+		$urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . htmlspecialchars($DocInfo->query);
+		
 		file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
-				"  <loc>" . $DocInfo->url . "</loc>\r\n" .
+				"  <loc>" . $urlForFile . "</loc>\r\n" .
 				" </url>\r\n", FILE_APPEND);
 
 		flush();
