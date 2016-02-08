@@ -45,10 +45,11 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 	 * @param int $requestLimit Max number of URLs to crawl.
 	 * @param boolean $countOnlyProcessed Check if only fetched URLs should count for $requestLimit.
 	 * @param int $phpTimeLimit Value in seconds for setting time limit. Default = 10000.
+	 * @param boolean $htmlSuffix Default true: will only allow .htm|.html endings. Will also exclude query strings
 	 */
 	public function generateSitemapCommand($url = 'http://example.com', $sitemapFileName = 'sitemap.xml',
 			$regexFileEndings = "#\.(jpg|jpeg|gif|png|mp3|mp4|gz|ico)$# i", $regexDirectoryExclude = "#\/(typo3conf|fileadmin|uploads)\/.*$# i",
-			$obeyRobotsTxt = FALSE, $requestLimit = 0, $countOnlyProcessed = TRUE, $phpTimeLimit = 10000) {
+			$obeyRobotsTxt = FALSE, $requestLimit = 0, $countOnlyProcessed = TRUE, $phpTimeLimit = 10000, $htmlSuffix = true) {
 		// It may take a whils to crawl a site ...
 		set_time_limit($phpTimeLimit);
 
@@ -71,10 +72,14 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		$crawler->addURLFilterRule("#(css|js).*$# i");
 		// exclude unnecessary directories
 		$crawler->addURLFilterRule($regexDirectoryExclude);
-		// only html files to crawle
-		$crawler->addURLFollowRule("#(htm|html)$# i");
+		// only html files to crawl
+		$test = (boolean)$htmlSuffix;
+		if ((boolean)$htmlSuffix === TRUE) {
+			$crawler->addURLFollowRule("#(htm|html)$# i");
+		}
 
-		$crawler->obeyRobotsTxt(TRUE);
+
+		$crawler->obeyRobotsTxt($obeyRobotsTxt);
 
 		// ... apply all other options and rules to the crawler
 
