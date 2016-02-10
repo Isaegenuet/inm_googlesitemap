@@ -47,21 +47,11 @@ class SitemapGenerator extends \PHPCrawler {
 	}
 
 	public function handleDocumentInfo($DocInfo) {
-		// Just detect linebreak for output ("\n" in CLI-mode, otherwise "<br>").
-		if (PHP_SAPI == "cli") {
-			$lb = "\n";
-		} else {
-			$lb = "<br />";
-		}
-
-		// echo "Adding " . $DocInfo->url . " to sitemap file" . $lb;
 		$urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . htmlspecialchars($DocInfo->query);
 		
 		file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
 				"  <loc>" . $urlForFile . "</loc>\r\n" .
 				" </url>\r\n", FILE_APPEND);
-
-		flush();
 
 		if ($DocInfo->error_occured === TRUE) {
 			$message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
