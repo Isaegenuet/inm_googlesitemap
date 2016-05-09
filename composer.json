@@ -1,0 +1,15 @@
+{
+    "name": "inm/inm-googlesitemap",
+    "description": "Google sitemap.xml extension for TYPO3 projects",
+    "type": "typo3-cms-extension",
+    "homepage": "https://www.inm.ch",
+    "license": "GPL-2.0+",
+    "keywords": ["TYPO3 CMS", "SEO, Google sitemap.xml"],
+    "authors": [
+        {
+            "name": "Ralf Merz",
+            "email": "ralf.merz@inm.ch"
+        }
+    ],
+    "version": "1.0.0"
+}
