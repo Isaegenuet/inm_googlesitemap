@@ -18,7 +18,13 @@
         },
         "classmap": ["Classes/Libraries/PHPCrawl/"]
     },
-    "scripts": {
-        "post-install-cmd": "git submodule init"
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/merzilla/phpcrawl.git"
+        }
+    ],
+    "require": {
+        "merzilla/phpcrawl": "dev-master"
     }
 }
