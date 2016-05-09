@@ -17,5 +17,8 @@
             "INM\\InmGooglesitemap\\": "Classes"
         },
         "classmap": ["Classes/Libraries/PHPCrawl/"]
+    },
+    "scripts": {
+        "post-install-cmd": "git submodule init"
     }
 }
