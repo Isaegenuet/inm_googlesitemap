@@ -24,7 +24,7 @@
 
 namespace INM\InmGooglesitemap\Generators;
 
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('inm_googlesitemap') . 'Classes/Libraries/PHPCrawl/libs/PHPCrawler.class.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('inm_googlesitemap') . 'Libraries/PHPCrawl/libs/PHPCrawler.class.php');
 
 class SitemapGenerator extends \PHPCrawler {
 
