@@ -16,16 +16,6 @@
         "psr-4": {
             "INM\\InmGooglesitemap\\": "Classes"
         },
-        "classmap": ["Classes/Libraries/PHPCrawl/"]
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/merzilla/phpcrawl.git",
-            "packagist": false
-        }
-    ],
-    "require": {
-        "merzilla/phpcrawl": "dev-master"
+        "classmap": ["Libraries/"]
     }
 }
