@@ -25,6 +25,6 @@
         }
     ],
     "require": {
-        "merzilla/phpcrawl": "*"
+        "merzilla/phpcrawl": "dev-master"
     }
 }
