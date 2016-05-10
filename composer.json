@@ -25,6 +25,6 @@
         }
     ],
     "require": {
-        "merzilla/phpcrawl": "^0.8"
+        "merzilla/phpcrawl": "*"
     }
 }
