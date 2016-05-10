@@ -21,7 +21,8 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/merzilla/phpcrawl.git"
+            "url": "https://github.com/merzilla/phpcrawl.git",
+            "packagist": false
         }
     ],
     "require": {
