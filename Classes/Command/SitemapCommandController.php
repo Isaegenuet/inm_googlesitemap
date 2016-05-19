@@ -70,6 +70,10 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		$crawler->addURLFilterRule($regexFileEndings);
 		// exclude css and js which have unique timestamps, e.g. like "some.css?12345678"
 		$crawler->addURLFilterRule("#(css|js).*$# i");
+
+		// exclude urls with get (?) Parameter
+		$crawler->addURLFilterRule("#\?# i");
+
 		// exclude unnecessary directories
 		$crawler->addURLFilterRule($regexDirectoryExclude);
 		// only html files to crawl
