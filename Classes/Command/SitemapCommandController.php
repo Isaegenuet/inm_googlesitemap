@@ -61,7 +61,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 
 		/** @var \INM\InmGooglesitemap\Generators\SitemapGenerator $crawler */
 		$crawler = $this->objectManager->get('INM\InmGooglesitemap\Generators\SitemapGenerator');
-		$crawler->setSitemapOutputFile("sitemap.xml"); // Set output-file, but temporary, until created.
+		$crawler->setSitemapOutputFile($sitemapFileName); // Set output-file, but temporary, until created.
 		$crawler->setURL($url);
 		//$crawler->setRequestDelay(0.5);
 		$crawler->setUserAgentString('INM Google Sitemap Crawler');
