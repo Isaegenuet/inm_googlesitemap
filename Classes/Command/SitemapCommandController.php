@@ -46,10 +46,12 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 	 * @param boolean $countOnlyProcessed Check if only fetched URLs should count for $requestLimit.
 	 * @param int $phpTimeLimit Value in seconds for setting time limit. Default = 10000.
 	 * @param boolean $htmlSuffix Default true: will only allow .htm|.html endings. Will also exclude query strings
+	 * @param string $linkExtractionTags By default the crawler searches for links in the following html-tags: href, src, url, location, codebase, background, data, profile, action and open.
 	 */
 	public function generateSitemapCommand($url = 'http://example.com', $sitemapFileName = 'sitemap.xml',
 			$regexFileEndings = "#\.(jpg|jpeg|gif|png|mp3|mp4|gz|ico)$# i", $regexDirectoryExclude = "#\/(typo3conf|fileadmin|uploads)\/.*$# i",
-			$obeyRobotsTxt = FALSE, $requestLimit = 0, $countOnlyProcessed = TRUE, $phpTimeLimit = 10000, $htmlSuffix = true) {
+			$obeyRobotsTxt = FALSE, $requestLimit = 0, $countOnlyProcessed = TRUE, $phpTimeLimit = 10000, $htmlSuffix = true,
+			$linkExtractionTags = 'href, src, url, location, codebase, background, data, profile, action, open') {
 		// It may take a whils to crawl a site ...
 		set_time_limit($phpTimeLimit);
 
@@ -81,10 +83,14 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		if ((boolean)$htmlSuffix === TRUE) {
 			$crawler->addURLFollowRule("#(htm|html)$# i");
 		}
-		
+
 		$crawler->obeyRobotsTxt($obeyRobotsTxt);
 
 		// ... apply all other options and rules to the crawler
+
+		// process $linkExtractionTags
+		$linkExtractionTagsArray = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $linkExtractionTags, TRUE);
+		$crawler->setLinkExtractionTags($linkExtractionTagsArray);
 
 		$crawler->setRequestLimit($requestLimit, $countOnlyProcessed); // Just for testing
 		//$crawler->goMultiProcessed(5); // Or use go() if you don't want multiple processes
