@@ -81,8 +81,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		if ((boolean)$htmlSuffix === TRUE) {
 			$crawler->addURLFollowRule("#(htm|html)$# i");
 		}
-
-
+		
 		$crawler->obeyRobotsTxt($obeyRobotsTxt);
 
 		// ... apply all other options and rules to the crawler
