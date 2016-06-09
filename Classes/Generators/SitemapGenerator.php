@@ -47,15 +47,15 @@ class SitemapGenerator extends \PHPCrawler {
 	}
 
 	public function handleDocumentInfo($DocInfo) {
-		$urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . htmlspecialchars($DocInfo->query);
-		
-		file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
-				"  <loc>" . $urlForFile . "</loc>\r\n" .
-				" </url>\r\n", FILE_APPEND);
-
 		if ($DocInfo->error_occured === TRUE) {
 			$message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
 			$GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
+		} else {
+			$urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . htmlspecialchars($DocInfo->query);
+
+			file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
+					"  <loc>" . $urlForFile . "</loc>\r\n" .
+					" </url>\r\n", FILE_APPEND);
 		}
 	}
 
