@@ -26,70 +26,78 @@ namespace INM\InmGooglesitemap\Generators;
 
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('inm_googlesitemap') . 'Libraries/PHPCrawl/libs/PHPCrawler.class.php');
 
-class SitemapGenerator extends \PHPCrawler {
+class SitemapGenerator extends \PHPCrawler
+{
 
-	protected $sitemapTemporaryOutputFile;
+    protected $sitemapTemporaryOutputFile;
 
-	protected $sitemapFinalOutputFile;
-	
-	protected $useTransferProtocol;
+    protected $sitemapFinalOutputFile;
 
-	public function setSitemapOutputFile($file) {
-		$this->sitemapTemporaryOutputFile = PATH_site . '_temporary_' . $file;
-		$this->sitemapFinalOutputFile = PATH_site . $file;
+    protected $useTransferProtocol;
 
-		if (file_exists($this->sitemapTemporaryOutputFile)) {
-			unlink($this->sitemapTemporaryOutputFile);
-		}
+    public function setSitemapOutputFile($file)
+    {
+        $this->sitemapTemporaryOutputFile = PATH_site . '_temporary_' . $file;
+        $this->sitemapFinalOutputFile = PATH_site . $file;
 
-		file_put_contents($this->sitemapTemporaryOutputFile,
-				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" .
-				"<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\r\n",
-				FILE_APPEND);
-	}
+        if (file_exists($this->sitemapTemporaryOutputFile)) {
+            unlink($this->sitemapTemporaryOutputFile);
+        }
 
-	public function handleDocumentInfo($DocInfo) {
-		if ($DocInfo->error_occured === TRUE) {
-			$message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
-			$GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
-		} else {
-			if (strcasecmp($this->useTransferProtocol, $DocInfo->protocol) !== 0) {
-				return;
-			} 
-			$urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . $DocInfo->file . htmlspecialchars($DocInfo->query);
+        file_put_contents($this->sitemapTemporaryOutputFile,
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" .
+                "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\r\n",
+                FILE_APPEND);
+    }
 
-			if (strpos(file_get_contents($this->sitemapTemporaryOutputFile), "<loc>" . $urlForFile . "</loc>") !== false) {
-				return;
-			} else {
-				file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
-						"  <loc>" . $urlForFile . "</loc>\r\n" .
-						" </url>\r\n", FILE_APPEND);
-			}
-		}
-	}
+    public function handleDocumentInfo($DocInfo)
+    {
+        if ($DocInfo->error_occured === true) {
+            $message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
+            $GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
+        } else {
+            if (strcasecmp($this->useTransferProtocol, $DocInfo->protocol) !== 0) {
+                return;
+            }
+            $urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . $DocInfo->file . htmlspecialchars($DocInfo->query);
 
-	/**
-	 * @return mixed
-	 */
-	public function getUseTransferProtocol()
-	{
-		return $this->useTransferProtocol;
-	}
+            if (strpos(file_get_contents($this->sitemapTemporaryOutputFile),
+                            "<loc>" . $urlForFile . "</loc>") !== false
+            ) {
+                return;
+            } else {
+                file_put_contents($this->sitemapTemporaryOutputFile, " <url>\r\n" .
+                        "  <loc>" . $urlForFile . "</loc>\r\n" .
+                        " </url>\r\n", FILE_APPEND);
+            }
+        }
+    }
 
-	/**
-	 * @param mixed $useTransferProtocol
-	 */
-	public function setUseTransferProtocol($useTransferProtocol)
-	{
-		$this->useTransferProtocol = $useTransferProtocol . '://';
-	}
+    /**
+     * @return mixed
+     */
+    public function getUseTransferProtocol()
+    {
+        return $this->useTransferProtocol;
+    }
 
-	public function closeFile() {
-		file_put_contents($this->sitemapTemporaryOutputFile, '</urlset>', FILE_APPEND);
-	}
+    /**
+     * @param mixed $useTransferProtocol
+     */
+    public function setUseTransferProtocol($useTransferProtocol)
+    {
+        $this->useTransferProtocol = $useTransferProtocol . '://';
+    }
 
-	public function publishFile() {
-		rename($this->sitemapTemporaryOutputFile, $this->sitemapFinalOutputFile);
-	}
+    public function closeFile()
+    {
+        file_put_contents($this->sitemapTemporaryOutputFile, '</urlset>', FILE_APPEND);
+    }
+
+    public function publishFile()
+    {
+        rename($this->sitemapTemporaryOutputFile, $this->sitemapFinalOutputFile);
+    }
 }
+
 ?>
