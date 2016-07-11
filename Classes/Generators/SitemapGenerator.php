@@ -31,6 +31,8 @@ class SitemapGenerator extends \PHPCrawler {
 	protected $sitemapTemporaryOutputFile;
 
 	protected $sitemapFinalOutputFile;
+	
+	protected $useTransferProtocol;
 
 	public function setSitemapOutputFile($file) {
 		$this->sitemapTemporaryOutputFile = PATH_site . '_temporary_' . $file;
@@ -51,6 +53,9 @@ class SitemapGenerator extends \PHPCrawler {
 			$message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
 			$GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
 		} else {
+			if (strcasecmp($this->useTransferProtocol, $DocInfo->protocol) !== 0) {
+				return;
+			} 
 			$urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . $DocInfo->file . htmlspecialchars($DocInfo->query);
 
 			if (strpos(file_get_contents($this->sitemapTemporaryOutputFile), "<loc>" . $urlForFile . "</loc>") !== false) {
@@ -61,6 +66,22 @@ class SitemapGenerator extends \PHPCrawler {
 						" </url>\r\n", FILE_APPEND);
 			}
 		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getUseTransferProtocol()
+	{
+		return $this->useTransferProtocol;
+	}
+
+	/**
+	 * @param mixed $useTransferProtocol
+	 */
+	public function setUseTransferProtocol($useTransferProtocol)
+	{
+		$this->useTransferProtocol = $useTransferProtocol . '://';
 	}
 
 	public function closeFile() {
