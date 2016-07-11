@@ -99,5 +99,3 @@ class SitemapGenerator extends \PHPCrawler
         rename($this->sitemapTemporaryOutputFile, $this->sitemapFinalOutputFile);
     }
 }
-
-?>
