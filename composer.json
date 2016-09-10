@@ -11,7 +11,13 @@
             "email": "ralf.merz@inm.ch"
         }
     ],
-    "version": "0.2.0",
+    "require": {
+        "typo3/cms-core": "^7.6.0"
+    },
+    "replace": {
+        "inm_googlesitemap": "self.version",
+        "typo3-ter/inm_googlesitemap": "self.version"
+    },
     "autoload": {
         "psr-4": {
             "INM\\InmGooglesitemap\\": "Classes"
