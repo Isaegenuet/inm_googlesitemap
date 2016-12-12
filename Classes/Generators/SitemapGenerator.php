@@ -59,7 +59,7 @@ class SitemapGenerator extends \PHPCrawler
             if (strcasecmp($this->useTransferProtocol, $DocInfo->protocol) !== 0) {
                 return;
             }
-            $urlForFile = $DocInfo->protocol . $DocInfo->host . $DocInfo->path . $DocInfo->file . htmlspecialchars($DocInfo->query);
+            $urlForFile = $DocInfo->protocol . $DocInfo->host . htmlspecialchars($DocInfo->path) . htmlspecialchars($DocInfo->file) . htmlspecialchars($DocInfo->query);
 
             if (strpos(file_get_contents($this->sitemapTemporaryOutputFile),
                             "<loc>" . $urlForFile . "</loc>") !== false
