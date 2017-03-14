@@ -50,7 +50,7 @@ class SitemapGenerator extends \PHPCrawler
                 FILE_APPEND);
     }
 
-    public function handleDocumentInfo($DocInfo)
+    public function handleDocumentInfo(\PHPCrawlerDocumentInfo $DocInfo)
     {
         if ($DocInfo->error_occured === true) {
             $message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
