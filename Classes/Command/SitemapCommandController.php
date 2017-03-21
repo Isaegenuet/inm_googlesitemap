@@ -66,12 +66,6 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
         // It may take a whils to crawl a site ...
         set_time_limit($phpTimeLimit);
 
-        /*
-        exec('php /Users/ralf/Downloads/PHPCrawl_083/enex2.php', $output);
-        $GLOBALS['BE_USER']->simplelog($output, $extKey = 'inm_googlesitemap', $error = 0);
-        return;
-        */
-
         /** @var \INM\InmGooglesitemap\Generators\SitemapGenerator $crawler */
         $crawler = $this->objectManager->get('INM\InmGooglesitemap\Generators\SitemapGenerator');
         $crawler->setSitemapOutputFile($sitemapFileName); // Set output-file, but temporary, until created.
