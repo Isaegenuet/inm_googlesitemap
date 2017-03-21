@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "^7.6.0"
+        "typo3/cms-core": ">=6.2"
     },
     "replace": {
         "inm_googlesitemap": "self.version",
