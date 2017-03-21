@@ -66,3 +66,9 @@ given name in the settings), after the Scheduler Task run successfully.
 The `sitemap.xml` only contains the URLs that the crawling process has found, which is the minimum requirement for a XML
 sitemap. This means we do not extend `pages` with fields like `priority` or add dates. I think that´ ok as Google does a
 good job either.
+
+### Why another sitemap extension?
+We think the approach to crawl from the frontend gives better results than trying to get all URLs form within the backend,
+where you have to write your own sitemap providers and so on. By using `inm_googlesitemap` all links are found from the view
+of the frontend, well... that means "just" like a crawler (which it is in deed though), or like a link checker, or maybe 
+a bot like Google. 
