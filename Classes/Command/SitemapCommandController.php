@@ -49,6 +49,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
      * @param boolean $htmlSuffix Default true: will only allow .htm|.html endings. Will also exclude query strings
      * @param string $linkExtractionTags By default the crawler searches for links in the following html-tags: href, src, url, location, codebase, background, data, profile, action and open.
      * @param string $useTransferProtocol Enter transfer protocol to use: http (=default) or https. URLs with wrong protocol will not be written.
+     * @param float $requestDelay time in seconds (float, e.g. 0.5 or 60/100 for 100 request per minute). Sets a delay for every HTTP-requests the crawler executes.
      */
     public function generateSitemapCommand(
             $url = 'http://example.com',
@@ -61,7 +62,8 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
             $phpTimeLimit = 10000,
             $htmlSuffix = true,
             $linkExtractionTags = 'href, src, url, location, codebase, background, data, profile, action, open',
-            $useTransferProtocol = 'http'
+            $useTransferProtocol = 'http',
+            $requestDelay = 2.0
     ) {
         // It may take a whils to crawl a site ...
         set_time_limit($phpTimeLimit);
@@ -71,7 +73,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
         $crawler->setSitemapOutputFile($sitemapFileName); // Set output-file, but temporary, until created.
         $crawler->setURL($url);
         $crawler->setUseTransferProtocol(trim($useTransferProtocol));
-        //$crawler->setRequestDelay(0.5);
+        $crawler->setRequestDelay(floatval($requestDelay));
         $crawler->setUserAgentString('INM Google Sitemap Crawler');
         $crawler->addContentTypeReceiveRule("#text/html#");
         // exclude file endings for assets
