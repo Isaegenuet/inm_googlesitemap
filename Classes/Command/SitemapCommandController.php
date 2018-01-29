@@ -50,6 +50,9 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
      * @param string $linkExtractionTags By default the crawler searches for links in the following html-tags: href, src, url, location, codebase, background, data, profile, action and open.
      * @param string $useTransferProtocol Enter transfer protocol to use: http (=default) or https. URLs with wrong protocol will not be written.
      * @param float $requestDelay time in seconds (float, e.g. 0.5 or 60/100 for 100 request per minute). Sets a delay for every HTTP-requests the crawler executes.
+     * @param string $username HTTP Auth username
+     * @param string $password HTTP Auth password
+     * @param string $urlRegexHttpAuth URL to send authentication information to, e.g. "#http://www\.foo\.com/protected_path/#"
      */
     public function generateSitemapCommand(
             $url = 'http://example.com',
@@ -63,7 +66,10 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
             $htmlSuffix = true,
             $linkExtractionTags = 'href, src, url, location, codebase, background, data, profile, action, open',
             $useTransferProtocol = 'http',
-            $requestDelay = 2.0
+            $requestDelay = 2.0,
+            $username = '',
+            $password = '',
+            $urlRegexHttpAuth = ''
     ) {
         // It may take a whils to crawl a site ...
         set_time_limit($phpTimeLimit);
@@ -99,6 +105,10 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
         // process $linkExtractionTags
         $linkExtractionTagsArray = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $linkExtractionTags, true);
         $crawler->setLinkExtractionTags($linkExtractionTagsArray);
+
+        if (strlen($username) >= 2 && strlen($password) >= 2) {
+            $crawler->addBasicAuthentication($urlRegexHttpAuth, $username, $password);
+        }
 
         $crawler->setRequestLimit($requestLimit, $countOnlyProcessed); // Just for testing
         //$crawler->goMultiProcessed(5); // Or use go() if you don't want multiple processes

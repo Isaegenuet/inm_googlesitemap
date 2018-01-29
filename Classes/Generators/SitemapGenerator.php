@@ -52,9 +52,14 @@ class SitemapGenerator extends \PHPCrawler
 
     public function handleDocumentInfo(\PHPCrawlerDocumentInfo $DocInfo)
     {
+        if ($DocInfo->http_status_code != 200) {
+            $message = 'Response Header not correct. Got HTTP Status Code ' . $DocInfo->http_status_code . ' for URL ' . $DocInfo->url . ' --- Complete Response Header: ' . $DocInfo->responseHeader->header_raw;
+            $GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 1);
+        }
+
         if ($DocInfo->error_occured === true) {
             $message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
-            $GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 0);
+            $GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 1);
         } else {
             if (strcasecmp($this->useTransferProtocol, $DocInfo->protocol) !== 0) {
                 return;
