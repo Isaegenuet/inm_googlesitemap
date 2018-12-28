@@ -65,14 +65,14 @@ class PHPCrawler
   /**
    * Defines whether robots.txt-file should be obeyed
    *
-   * @val bool
+   * @var bool
    */
   protected $obey_robots_txt = false;
   
   /**
    * Location of robots.txt-file to obey as URI
    *
-   * @val string
+   * @var string
    */
   protected $robots_txt_uri;
   
@@ -352,7 +352,7 @@ class PHPCrawler
    * Be sure you did override the {@link handleDocumentInfo()}- or {@link handlePageData()}-method before calling the go()-method
    * to process the documents the crawler finds.
    *
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function go()
   {
@@ -415,7 +415,7 @@ class PHPCrawler
    * @param int $process_count     Number of processes to use
    * @param int $multiprocess_mode The multiprocess-mode to use.
    *                               One of the {@link PHPCrawlerMultiProcessModes}-constants
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function goMultiProcessed($process_count = 3, $multiprocess_mode = 1)
   { 
@@ -918,7 +918,7 @@ class PHPCrawler
    * Retruns summarizing report-information about the crawling-process after it has finished.
    *
    * @return PHPCrawlerProcessReport PHPCrawlerProcessReport-object containing process-summary-information
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function getProcessReport()
   { 
@@ -973,7 +973,7 @@ class PHPCrawler
    * For detailed information on the conatining array-keys see PHPCrawlerProcessReport-class.
    * 
    * @deprecated Please use getProcessReport() instead.
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    */
   public function getReport()
   {
@@ -1009,7 +1009,7 @@ class PHPCrawler
    *
    * @param PHPCrawlerResponseHeader $header The header as PHPCrawlerResponseHeader-object
    * @return int                             The document won't be received if you let this method return any negative value.
-   * @section 3 Overridable methods / User data-processing
+   * Section 3 Overridable methods / User data-processing
    */
   public function handleHeaderInfo(PHPCrawlerResponseHeader $header)
   {
@@ -1051,7 +1051,7 @@ class PHPCrawler
    * $crawler->goMultiProcessed(5, PHPCrawlerMultiProcessModes::MPMODE_CHILDS_EXECUTES_USERCODE);
    * </code>
    *
-   * @section 3 Overridable methods / User data-processing
+   * Section 3 Overridable methods / User data-processing
    */
   public function initChildProcess()
   {
@@ -1091,7 +1091,7 @@ class PHPCrawler
    *                                         Please see the reference of the {@link PHPCrawlerDocumentInfo}-class for detailed information.
    * @return int                             The crawling-process will stop immedeatly if you let this method return any negative value.
    *
-   * @section 3 Overridable methods / User data-processing
+   * Section 3 Overridable methods / User data-processing
    */
   public function handleDocumentInfo(PHPCrawlerDocumentInfo $PageInfo){}
   
@@ -1107,7 +1107,7 @@ class PHPCrawler
    * @param string $url The URL
    * @return bool
    *
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function setURL($url)
   {
@@ -1139,7 +1139,7 @@ class PHPCrawler
    *
    * @param int $port The port
    * @return bool
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function setPort($port)
   {
@@ -1174,7 +1174,7 @@ class PHPCrawler
    * @param int    $level  The priority-level
    *
    * @return bool  TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   function addLinkPriority($regex, $level)
   {
@@ -1196,7 +1196,7 @@ class PHPCrawler
    * @param bool $mode  If TRUE, the crawler will follow header-redirects.
    *                    The default-value is TRUE.
    * @return bool
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function setFollowRedirects($mode)
   {
@@ -1218,7 +1218,7 @@ class PHPCrawler
    *
    * @param bool $mode If TRUE, the crawler will follow redirects until content was finally found.
    *                   Defaults to TRUE.
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function setFollowRedirectsTillContent($mode)
   {
@@ -1249,7 +1249,7 @@ class PHPCrawler
    * @param int $follow_mode The basic follow-mode for the crawling-process (0, 1, 2 or 3).
    * @return bool
    *
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function setFollowMode($follow_mode)
   {
@@ -1283,7 +1283,7 @@ class PHPCrawler
    * @param string $regex The rule as a regular-expression
    * @return bool TRUE if the rule was added to the list.
    *              FALSE if the given regex is not valid.
-   * @section 2 Filter-settings
+   * Section 2 Filter-settings
    */
   public function addContentTypeReceiveRule($regex)
   {
@@ -1293,7 +1293,7 @@ class PHPCrawler
   /**
    * Alias for addContentTypeReceiveRule().
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated
    * 
    */
@@ -1321,7 +1321,7 @@ class PHPCrawler
    * @param string $regex Regular-expression defining the rule
    * @return bool TRUE if the regex is valid and the rule was added to the list, otherwise FALSE.
    *
-   * @section 2 Filter-settings
+   * Section 2 Filter-settings
    */
   public function addURLFollowRule($regex)
   {
@@ -1344,7 +1344,7 @@ class PHPCrawler
    * @param string $regex Regular-expression defining the rule
    * @return bool TRUE if the regex is valid and the rule was added to the list, otherwise FALSE.
    *
-   * @section 2 Filter-settings
+   * Section 2 Filter-settings
    */
   public function addURLFilterRule($regex)
   {
@@ -1354,7 +1354,7 @@ class PHPCrawler
   /**
    * Alias for addURLFollowRule().
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated
    * 
    */
@@ -1366,7 +1366,7 @@ class PHPCrawler
   /**
    * Alias for addURLFilterRule().
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated
    * 
    */
@@ -1401,7 +1401,7 @@ class PHPCrawler
    * 
    * @param string $regex The rule as a regular-expression
    * @return bool         TRUE if the rule was added to the list and the regex is valid.
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function addStreamToFileContentType($regex)
   {
@@ -1414,7 +1414,7 @@ class PHPCrawler
    * Please use setWorkingDirectory()
    *
    * @deprecated This method has no function anymore since v 0.8.
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    */
   public function setTmpFile($tmp_file)
   {
@@ -1439,7 +1439,7 @@ class PHPCrawler
    *                               If not set (or set to null), the crawler uses the default robots.txt-location of the root-URL ("http://rooturl.com/robots.txt")
    *
    * @return bool
-   * @section 2 Filter-settings
+   * Section 2 Filter-settings
    */
   public function obeyRobotsTxt($mode, $robots_txt_uri = null)
   {
@@ -1459,7 +1459,7 @@ class PHPCrawler
    * Alias for addStreamToFileContentType().
    *
    * @deprecated
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    */ 
   public function addReceiveToTmpFileMatch($regex)
   {
@@ -1473,7 +1473,7 @@ class PHPCrawler
    * It just still exists because of compatibility-reasons.
    *
    * @deprecated This method has no function anymore since v 0.8.
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    */ 
   public function addReceiveToMemoryMatch($regex)
   {
@@ -1494,7 +1494,7 @@ class PHPCrawler
    *                                            If FALSE, the given limit refers to the total number of requests done, regardless of the number of successfully received documents.
    *                                            Defaults to FALSE.
    * @return bool
-   * @section 5 Limit-settings
+   * Section 5 Limit-settings
    */
   public function setRequestLimit($limit, $only_count_received_documents = false)
   {
@@ -1508,7 +1508,7 @@ class PHPCrawler
   /**
    * Alias for setRequestLimit() method.
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated Please use setRequestLimit() method!
    */
   public function setPageLimit($limit, $only_count_received_documents = false)
@@ -1528,7 +1528,7 @@ class PHPCrawler
    *
    * @param int $bytes The limit in bytes.
    * @return bool
-   * @section 5 Limit-settings
+   * Section 5 Limit-settings
    */
   public function setContentSizeLimit($bytes)
   {
@@ -1545,7 +1545,7 @@ class PHPCrawler
    * @param bool $complete_requested_files This parameter has no function anymore!
    *
    * @return bool
-   * @section 5 Limit-settings
+   * Section 5 Limit-settings
    */
   public function setTrafficLimit($bytes, $complete_requested_files = true)
   {
@@ -1567,7 +1567,7 @@ class PHPCrawler
    *
    * @param bool $mode
    * @return bool
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function enableCookieHandling($mode)
   {
@@ -1580,7 +1580,7 @@ class PHPCrawler
   /**
    * Alias for enableCookieHandling()
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated Please use enableCookieHandling()
    */
   public function setCookieHandling($mode)
@@ -1603,7 +1603,7 @@ class PHPCrawler
    *
    * @param bool $mode
    * @return bool
-   * @section 6 Linkfinding settings 
+   * Section 6 Linkfinding settings 
    */
   public function enableAggressiveLinkSearch($mode)
   {
@@ -1613,7 +1613,7 @@ class PHPCrawler
   /**
    * Alias for enableAggressiveLinkSearch()
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated Please use enableAggressiveLinkSearch()
    */
   public function setAggressiveLinkExtraction($mode)
@@ -1634,7 +1634,7 @@ class PHPCrawler
    * Note: Reducing the number of tags in this list will improve the crawling-performance (a little).
    *
    * @param array $tag_array Numeric array containing the tags.
-   * @section 6 Linkfinding settings
+   * Section 6 Linkfinding settings
    */
   public function setLinkExtractionTags($tag_array)
   {
@@ -1650,7 +1650,7 @@ class PHPCrawler
    * Example
    * <code>$crawler->addLinkExtractionTags("href", "src");</code>
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated Please use setLinkExtractionTags()
    */
   public function addLinkExtractionTags()
@@ -1675,7 +1675,7 @@ class PHPCrawler
    *
    * @return bool
    *
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function addBasicAuthentication($url_regex, $username, $password)
   {
@@ -1686,7 +1686,7 @@ class PHPCrawler
    * Sets the "User-Agent" identification-string that will be send with HTTP-requests.
    *
    * @param string $user_agent The user-agent-string. The default-value is "PHPCrawl".
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function setUserAgentString($user_agent)
   {
@@ -1699,7 +1699,7 @@ class PHPCrawler
    *
    * Thes method has no function anymore, just still exists because of compatibility-reasons.
    *
-   * @section 11 Deprecated
+   * Section 11 Deprecated
    * @deprecated
    */
   public function disableExtendedLinkInfo($mode)
@@ -1730,7 +1730,7 @@ class PHPCrawler
    *
    * @param string $directory The working-directory
    * @return bool             TRUE on success, otherwise false.
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function setWorkingDirectory($directory)
   {
@@ -1750,7 +1750,7 @@ class PHPCrawler
    * @param string $proxy_username Optional. The username for proxy-authentication or NULL if no authentication is required.
    * @param string $proxy_password Optional. The password for proxy-authentication or NULL if no authentication is required.
    *
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function setProxy($proxy_host, $proxy_port, $proxy_username = null, $proxy_password = null)
   {
@@ -1766,7 +1766,7 @@ class PHPCrawler
    * @param int $timeout The timeout in seconds, the default-value is 5 seconds.
    * @return bool
    *
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function setConnectionTimeout($timeout)
   {
@@ -1790,7 +1790,7 @@ class PHPCrawler
    * @param int $timeout The timeout in seconds, the default-value is 2 seconds.
    * @return bool
    *
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function setStreamTimeout($timeout)
   {
@@ -1826,7 +1826,7 @@ class PHPCrawler
    * @param string $regex Regular-expression defining the rule
    * @return bool         TRUE if the rule was successfully added
    *
-   * @section 6 Linkfinding settings
+   * Section 6 Linkfinding settings
    */
   public function addLinkSearchContentType($regex)
   {
@@ -1862,7 +1862,7 @@ class PHPCrawler
    *
    *                            Or one of the {@link PHPCrawlerUrlCacheTypes}::URLCACHE..-constants.
    * @return bool
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function setUrlCacheType($url_cache_type)
   {
@@ -1884,7 +1884,7 @@ class PHPCrawler
    * By default, the crawler will NOT obey nofollow-tags.
    * 
    * @param bool $mode If set to TRUE, the crawler will obey "nofollow"-tags
-   * @section 2 Filter-settings
+   * Section 2 Filter-settings
    */
   public function obeyNoFollowTags($mode)
   {
@@ -1907,7 +1907,7 @@ class PHPCrawler
    *                                (like array("post_key1" => "post_value1", "post_key2" => "post_value2")
    *
    * @return bool
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function addPostData($url_regex, $post_data_array)
   {
@@ -1918,7 +1918,7 @@ class PHPCrawler
    * Returns the unique ID of the instance of the crawler
    *
    * @return int
-   * @section 9 Process resumption
+   * Section 9 Process resumption
    */
   public function getCrawlerId()
   {
@@ -1972,7 +1972,7 @@ class PHPCrawler
    *
    * @param int $crawler_id The crawler-ID of the crawling-process that should be resumed.
    *                        (see {@link getCrawlerId()})
-   * @section 9 Process resumption
+   * Section 9 Process resumption
    */
   public function resume($crawler_id)
   {
@@ -2001,7 +2001,7 @@ class PHPCrawler
    *
    * For further details on how to resume aborted processes please see the documentation of the
    * {@link resume()} method.
-   * @section 9 Process resumption
+   * Section 9 Process resumption
    */
   public function enableResumption()
   {
@@ -2024,7 +2024,7 @@ class PHPCrawler
    *                                   1 -> HTTP 1.0
    *                                   2 -> HTTP 1.1 (default)
    * @return bool
-   * @section 1 Basic settings
+   * Section 1 Basic settings
    */
   public function setHTTPProtocolVersion($http_protocol_version)
   {
@@ -2044,7 +2044,7 @@ class PHPCrawler
    * the crawler will handle the encoded data correctly regardless of this setting.
    *
    * @param bool $mode Set to TRUE for enabling support/requests for gzip-encoded content, defaults to FALSE
-   * @section 10 Other settings
+   * Section 10 Other settings
    */
   public function requestGzipContent($mode)
   {
@@ -2070,7 +2070,7 @@ class PHPCrawler
    *
    * @param float $time The request-delay-time in seconds.
    * @return bool
-   * @section 5 Limit-settings
+   * Section 5 Limit-settings
    */
   public function setRequestDelay($time)
   {
@@ -2109,7 +2109,7 @@ class PHPCrawler
    * </code>
    *
    * @param int $document_sections Bitwise combination of the {@link PHPCrawlerLinkSearchDocumentSections}-constants.
-   * @section 6 Linkfinding settings 
+   * Section 6 Linkfinding settings 
    */
   public function excludeLinkSearchDocumentSections($document_sections)
   {
@@ -2125,7 +2125,7 @@ class PHPCrawler
    * of the crawling-process, but won't follow any further links found in underlying documents.
    *
    * @param int $depth The maximum link-depth the crawler should follow
-   * @section 5 Limit-settings
+   * Section 5 Limit-settings
    */
   public function setCrawlingDepthLimit($depth)
   {

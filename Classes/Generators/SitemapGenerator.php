@@ -23,11 +23,15 @@
  */
 
 namespace INM\InmGooglesitemap\Generators;
+use PHPCrawler;
+use Psr\Log\LoggerAwareTrait;
 
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('inm_googlesitemap') . 'Libraries/PHPCrawl/libs/PHPCrawler.class.php');
 
-class SitemapGenerator extends \PHPCrawler
+class SitemapGenerator extends PHPCrawler implements \Psr\Log\LoggerAwareInterface
 {
+
+    use LoggerAwareTrait;
 
     protected $sitemapTemporaryOutputFile;
 
@@ -53,13 +57,15 @@ class SitemapGenerator extends \PHPCrawler
     public function handleDocumentInfo(\PHPCrawlerDocumentInfo $DocInfo)
     {
         if ($DocInfo->http_status_code != 200) {
-            $message = 'Response Header not correct. Got HTTP Status Code ' . $DocInfo->http_status_code . ' for URL ' . $DocInfo->url . ' --- Complete Response Header: ' . $DocInfo->responseHeader->header_raw;
-            $GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 1);
+            $message = 'Extension inm_googlesitemap: Response Header not correct. Got HTTP Status Code ' . $DocInfo->http_status_code . ' for URL ' . $DocInfo->url . ' --- Complete Response Header: ' . $DocInfo->responseHeader->header_raw;
+            //$GLOBALS['BE_USER']->writelog($message, $extKey = 'inm_googlesitemap', $error = 1);
+            $this->logger->error($message);
         }
 
         if ($DocInfo->error_occured === true) {
-            $message = 'Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
-            $GLOBALS['BE_USER']->simplelog($message, $extKey = 'inm_googlesitemap', $error = 1);
+            $message = 'Extension inm_googlesitemap: Error Code: ' . $DocInfo->error_code . ' --- Reason: ' . $DocInfo->error_string;
+            //$GLOBALS['BE_USER']->writelog($message, $extKey = 'inm_googlesitemap', $error = 1);
+            $this->logger->error($message);
         } else {
             if (strcasecmp($this->useTransferProtocol, $DocInfo->protocol) !== 0) {
                 return;

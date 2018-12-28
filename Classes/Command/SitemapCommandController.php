@@ -25,6 +25,7 @@
 namespace INM\InmGooglesitemap\Command;
 
 use INM\InmGooglesitemap\Generators\SitemapGenerator;
+use TYPO3\CMS\Extbase\Annotation\Inject;
 
 class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController
 {
@@ -33,7 +34,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
      * objectManager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
+     * @Inject
      */
     protected $objectManager = null;
 
@@ -42,7 +43,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
      * @param string $sitemapFileName File name of the XML file. Default is "sitemap.xml".
      * @param string $regexFileEndings Regular expression for file endings to skip
      * @param string $regexDirectoryExclude Regular expression for directories to skip.
-     * @param boolean $obeyRobotsTxt Check to obey rules from robots.txt
+     * @param bool $obeyRobotsTxt Check to obey rules from robots.txt
      * @param int $requestLimit Max number of URLs to crawl.
      * @param boolean $countOnlyProcessed Check if only fetched URLs should count for $requestLimit.
      * @param int $phpTimeLimit Value in seconds for setting time limit. Default = 10000.
@@ -75,7 +76,7 @@ class SitemapCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
         set_time_limit($phpTimeLimit);
 
         /** @var \INM\InmGooglesitemap\Generators\SitemapGenerator $crawler */
-        $crawler = $this->objectManager->get('INM\InmGooglesitemap\Generators\SitemapGenerator');
+        $crawler = $this->objectManager->get(SitemapGenerator::class);
         $crawler->setSitemapOutputFile($sitemapFileName); // Set output-file, but temporary, until created.
         $crawler->setURL($url);
         $crawler->setUseTransferProtocol(trim($useTransferProtocol));
