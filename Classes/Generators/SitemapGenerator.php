@@ -56,7 +56,7 @@ class SitemapGenerator extends PHPCrawler implements \Psr\Log\LoggerAwareInterfa
 
     public function handleDocumentInfo(\PHPCrawlerDocumentInfo $DocInfo)
     {
-        if ($DocInfo->http_status_code != 200) {
+        if (!in_array($DocInfo->http_status_code, array(200, 307))) {
             $message = 'Extension inm_googlesitemap: Response Header not correct. Got HTTP Status Code ' . $DocInfo->http_status_code . ' for URL ' . $DocInfo->url . ' --- Complete Response Header: ' . $DocInfo->responseHeader->header_raw;
             //$GLOBALS['BE_USER']->writelog($message, $extKey = 'inm_googlesitemap', $error = 1);
             $this->logger->error($message);
