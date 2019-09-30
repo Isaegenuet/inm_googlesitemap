@@ -1,19 +1,19 @@
 {
-    "name": "inm/inm-googlesitemap",
+    "name": "merzilla/inm-googlesitemap",
     "description": "Google sitemap.xml extension for TYPO3 projects",
     "type": "typo3-cms-extension",
-    "homepage": "https://www.inm.ch",
+    "homepage": "https://www.plan-net.ch",
     "license": "GPL-2.0+",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "keywords": ["TYPO3 CMS", "SEO, Google sitemap.xml"],
     "authors": [
         {
             "name": "Ralf Merz",
-            "email": "ralf.merz@inm.ch"
+            "email": "mail@merzilla.de"
         }
     ],
     "require": {
-        "typo3/cms-core": ">=9.5",
+        "typo3/cms-core": "^9.5",
         "php": "^7.2"
     },
     "replace": {
