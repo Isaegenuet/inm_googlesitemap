@@ -4,7 +4,7 @@
     "type": "typo3-cms-extension",
     "homepage": "https://www.plan-net.ch",
     "license": "GPL-2.0+",
-    "version": "0.5.2",
+    "version": "0.5.3",
     "keywords": ["TYPO3 CMS", "SEO","Google XML sitemap"],
     "authors": [
         {
@@ -17,7 +17,6 @@
         "php": "^7.2"
     },
     "replace": {
-        "inm_googlesitemap": "self.version",
         "typo3-ter/inm_googlesitemap": "self.version"
     },
     "autoload": {
