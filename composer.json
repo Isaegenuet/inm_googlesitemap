@@ -4,7 +4,7 @@
     "type": "typo3-cms-extension",
     "homepage": "https://www.plan-net.ch",
     "license": "GPL-2.0+",
-    "version": "0.5.3",
+    "version": "0.5.4",
     "keywords": ["TYPO3 CMS", "SEO","Google XML sitemap"],
     "authors": [
         {
@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "^9.5",
+        "typo3/cms-core": "^9.5.20",
         "php": "^7.2"
     },
     "replace": {
